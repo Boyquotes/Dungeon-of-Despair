@@ -57,15 +57,13 @@ func keyboard_help(detection : bool) -> void:
 	keyboard_sprite.visible = detection
 
 
-func _on_object_detection_body_entered(body):
+func _on_object_detection_body_entered(_body):
 	print("Object Detected")
-	print(body)
-	Global.current_detected_entities = body
 	keyboard_help(true)
+	Global.detected_entities = true
 
 
-func _on_object_detection_body_exited(body):
-	print(body)
-	Global.current_detected_entities = null
+func _on_object_detection_body_exited(_body):
 	print("Object Detection Disable")
 	keyboard_help(false)
+	Global.detected_entities = false

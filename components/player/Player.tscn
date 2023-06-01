@@ -1163,6 +1163,7 @@ metadata/_edit_lock_ = true
 
 [node name="KeyboardHelp" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(0, -17)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_s5aib")
@@ -1179,7 +1180,7 @@ metadata/_edit_lock_ = true
 [node name="ObjectDetection" type="Area2D" parent="."]
 position = Vector2(3, 9)
 rotation = -1.5708
-collision_layer = 0
+collision_layer = 16
 collision_mask = 4
 input_pickable = false
 metadata/_edit_group_ = true

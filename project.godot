@@ -61,6 +61,7 @@ interact={
 2d_physics/layer_2="walls"
 2d_physics/layer_3="objects"
 2d_physics/layer_4="slippery_surface"
+2d_physics/layer_5="player_detector"
 
 [rendering]
 

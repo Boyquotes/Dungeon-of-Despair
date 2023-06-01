@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://byi3njuc4rm8y"]
+[gd_scene load_steps=11 format=3 uid="uid://byi3njuc4rm8y"]
 
 [ext_resource type="Script" path="res://levels/level_two.gd" id="1_d5nx2"]
 [ext_resource type="Texture2D" uid="uid://canoasjxpli4t" path="res://assets/terrain/dungeon_tileset.png" id="2_4ak80"]
 [ext_resource type="PackedScene" uid="uid://dfyvycxxsdtl1" path="res://components/player/Player.tscn" id="2_mts7l"]
 [ext_resource type="Script" path="res://script/next_level.gd" id="3_kg4ub"]
+[ext_resource type="PackedScene" uid="uid://tqrmvn66tojs" path="res://components/objects/ladder/ladder_down.tscn" id="4_nt6am"]
+[ext_resource type="PackedScene" uid="uid://dngc5uiv6in2y" path="res://components/objects/ladder/ladder_up.tscn" id="5_7q4h6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ruoiq"]
 texture = ExtResource("2_4ak80")
@@ -252,6 +254,28 @@ limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Ladders" type="Node2D" parent="Objects"]
+y_sort_enabled = true
+
+[node name="LadderDown" parent="Objects/Ladders" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("4_nt6am")]
+position = Vector2(1232, 208)
+player = NodePath("../../../Player")
+player_position = NodePath("../RespawnPos/id2")
+
+[node name="LadderUp" parent="Objects/Ladders" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("5_7q4h6")]
+position = Vector2(368, 80)
+player = NodePath("../../../Player")
+player_position = NodePath("../RespawnPos/id1")
+
+[node name="RespawnPos" type="Node2D" parent="Objects/Ladders"]
+
+[node name="id1" type="Marker2D" parent="Objects/Ladders/RespawnPos"]
+position = Vector2(1200, 211)
+
+[node name="id2" type="Marker2D" parent="Objects/Ladders/RespawnPos"]
+position = Vector2(368, 112)
 
 [node name="GotoLevelOne" type="Area2D" parent="."]
 position = Vector2(1487, -32)

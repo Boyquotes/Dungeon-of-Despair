@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bexom3kyescb0"]
+[gd_scene load_steps=13 format=3 uid="uid://bexom3kyescb0"]
 
 [ext_resource type="Texture2D" uid="uid://canoasjxpli4t" path="res://assets/terrain/dungeon_tileset.png" id="1_0wj3g"]
 [ext_resource type="Script" path="res://levels/level_three.gd" id="1_nls8m"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dfyvycxxsdtl1" path="res://components/player/Player.tscn" id="3_0xjc3"]
 [ext_resource type="Texture2D" uid="uid://b6g4s00440i3o" path="res://assets/terrain/ice.png" id="4_mgrsq"]
 [ext_resource type="PackedScene" uid="uid://bbeb88na4iaok" path="res://components/objects/ice_hole/ice_hole.tscn" id="6_74vm5"]
-[ext_resource type="PackedScene" uid="uid://tqrmvn66tojs" path="res://components/objects/ladder/ladder.tscn" id="6_x86l1"]
+[ext_resource type="PackedScene" uid="uid://tqrmvn66tojs" path="res://components/objects/ladder/ladder_down.tscn" id="6_mscfm"]
+[ext_resource type="PackedScene" uid="uid://dngc5uiv6in2y" path="res://components/objects/ladder/ladder_up.tscn" id="8_hol8t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ruoiq"]
 texture = ExtResource("1_0wj3g")
@@ -719,16 +720,19 @@ texture_region_size = Vector2i(32, 32)
 4:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 4:1/0/physics_layer_1/angular_velocity = 0.0
 5:1/0 = 0
+5:1/0/z_index = 1
 5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:1/0/physics_layer_0/angular_velocity = 0.0
 5:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 5:1/0/physics_layer_1/angular_velocity = 0.0
 6:1/0 = 0
+6:1/0/z_index = 1
 6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:1/0/physics_layer_0/angular_velocity = 0.0
 6:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 6:1/0/physics_layer_1/angular_velocity = 0.0
 7:1/0 = 0
+7:1/0/z_index = 1
 7:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:1/0/physics_layer_0/angular_velocity = 0.0
 7:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
@@ -862,7 +866,7 @@ layer_1/tile_data = PackedInt32Array(1966130, 458752, 3, 1900594, 458752, 3, 183
 
 [node name="Player" parent="." instance=ExtResource("3_0xjc3")]
 y_sort_enabled = true
-position = Vector2(912, 336)
+position = Vector2(1744, 324)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -870,11 +874,89 @@ remote_path = NodePath("../../Camera2D")
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Ladder" parent="Objects" instance=ExtResource("6_x86l1")]
+[node name="Ladders" type="Node2D" parent="Objects"]
 y_sort_enabled = true
-position = Vector2(864, 208)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="1F" type="Node2D" parent="Objects/Ladders"]
+y_sort_enabled = true
+
+[node name="1LeftSide" parent="Objects/Ladders/1F" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("6_mscfm")]
+y_sort_enabled = true
+position = Vector2(1744, 208)
+player = NodePath("../../../../Player")
+player_position = NodePath("../../../LadderRespawnPoints/2F/2LeftSide")
+
+[node name="1MiddleSide" parent="Objects/Ladders/1F" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("6_mscfm")]
+y_sort_enabled = true
+position = Vector2(2096, 112)
+player = NodePath("../../../../Player")
+player_position = NodePath("../../../LadderRespawnPoints/2F/2MiddleSide")
+
+[node name="2F" type="Node2D" parent="Objects/Ladders"]
+y_sort_enabled = true
+
+[node name="2RightSide" parent="Objects/Ladders/2F" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("6_mscfm")]
+y_sort_enabled = true
+position = Vector2(1424, 240)
+player = NodePath("../../../../Player")
+player_position = NodePath("../../../LadderRespawnPoints/3F/3Single")
+
+[node name="2LeftSide" parent="Objects/Ladders/2F" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("8_hol8t")]
+position = Vector2(880, 208)
+player = NodePath("../../../../Player")
+player_position = NodePath("../../../LadderRespawnPoints/1F/1LeftSide")
+
+[node name="2MiddleSide" parent="Objects/Ladders/2F" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("8_hol8t")]
+position = Vector2(1232, 112)
+player = NodePath("../../../../Player")
+player_position = NodePath("../../../LadderRespawnPoints/1F/1MiddleSide")
+
+[node name="3F" type="Node2D" parent="Objects/Ladders"]
+y_sort_enabled = true
+
+[node name="3Single" parent="Objects/Ladders/3F" node_paths=PackedStringArray("player", "player_position") instance=ExtResource("8_hol8t")]
+position = Vector2(656, 211)
+player = NodePath("../../../../Player")
+player_position = NodePath("../../../LadderRespawnPoints/2F/2RightSide")
+
+[node name="LadderRespawnPoints" type="Node2D" parent="Objects"]
+visible = false
+y_sort_enabled = true
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="1F" type="Node2D" parent="Objects/LadderRespawnPoints"]
+y_sort_enabled = true
+
+[node name="1LeftSide" type="Marker2D" parent="Objects/LadderRespawnPoints/1F"]
+position = Vector2(1744, 240)
+
+[node name="1MiddleSide" type="Marker2D" parent="Objects/LadderRespawnPoints/1F"]
+position = Vector2(2064, 112)
+
+[node name="2F" type="Node2D" parent="Objects/LadderRespawnPoints"]
+y_sort_enabled = true
+
+[node name="2LeftSide" type="Marker2D" parent="Objects/LadderRespawnPoints/2F"]
+position = Vector2(880, 240)
+
+[node name="2MiddleSide" type="Marker2D" parent="Objects/LadderRespawnPoints/2F"]
+position = Vector2(1232, 144)
+
+[node name="2RightSide" type="Marker2D" parent="Objects/LadderRespawnPoints/2F"]
+position = Vector2(1424, 272)
+
+[node name="3F" type="Node2D" parent="Objects/LadderRespawnPoints"]
+y_sort_enabled = true
+
+[node name="3Single" type="Marker2D" parent="Objects/LadderRespawnPoints/3F"]
+position = Vector2(656, 240)
 
 [node name="IceHoles" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="2FHoles" type="Node2D" parent="IceHoles"]
 metadata/_edit_lock_ = true
@@ -1001,6 +1083,8 @@ respawn_point = NodePath("../../../RespawnPoints/2FRespawn/id10")
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 visible = false
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="1FRespawn" type="Node2D" parent="RespawnPoints"]
 metadata/_edit_lock_ = true
@@ -1080,7 +1164,7 @@ position = Vector2(1424, 720)
 position = Vector2(1328, 880)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(912, 336)
+position = Vector2(1744, 324)
 zoom = Vector2(5, 5)
 limit_left = 0
 limit_top = 0
