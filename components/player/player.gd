@@ -58,12 +58,10 @@ func keyboard_help(detection : bool) -> void:
 
 
 func _on_object_detection_body_entered(_body):
-	print("Object Detected")
 	keyboard_help(true)
 	Global.detected_entities = true
 
 
 func _on_object_detection_body_exited(_body):
-	print("Object Detection Disable")
 	keyboard_help(false)
 	Global.detected_entities = false
