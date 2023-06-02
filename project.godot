@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.0", "GL Compatibility")
 [autoload]
 
 Global="*res://script/global.gd"
+TransitionState="*res://components/resources/transition_state.tscn"
 
 [display]
 
