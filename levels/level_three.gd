@@ -1,6 +1,9 @@
 extends Node2D
 
-var current_level : int = 3
+@onready var player : CharacterBody2D = $Player
 
 func _ready() -> void:
-	Global.current_level = current_level
+	Global.current_level = self.name
+	if Global.visited_level != null:
+		if player:
+			player.set_transform(get_node(Global.visited_level + "Pos").get_transform())
