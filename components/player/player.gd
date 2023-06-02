@@ -24,7 +24,7 @@ func _physics_process(_delta):
 	
 	if input_direction.x == 0:
 		input_direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-		
+
 	Global.player_vec_position = input_direction
 
 	if icy_surface.is_colliding():
