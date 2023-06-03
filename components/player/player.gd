@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var keyboard_sprite : Sprite2D = $KeyboardHelp
-@onready var object_detection : Area2D = $ObjectDetection
+@onready var object_detection : Area2D = $AreaDetector
 @onready var icy_surface : ShapeCast2D = $IcyDetector
 
 func _ready():
@@ -53,15 +53,18 @@ func player_animation_parameters():
 		animation_tree["parameters/Walk/blend_position"] = velocity
 		animation_tree["parameters/Slippery/blend_position"] = velocity
 
-func keyboard_help(detection : bool) -> void:
-	keyboard_sprite.visible = detection
+func keyboard_help(inzone : bool) -> void:
+	keyboard_sprite.visible = inzone
+
+func dialog():
+	pass
 
 
-func _on_object_detection_body_entered(_body):
+func _on_object_detection_area_entered(_area):
 	keyboard_help(true)
 	Global.detected_entities = true
 
 
-func _on_object_detection_body_exited(_body):
+func _on_object_detection_area_exited(_area):
 	keyboard_help(false)
 	Global.detected_entities = false
